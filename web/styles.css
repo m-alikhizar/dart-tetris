@@ -7,6 +7,7 @@ html, body {
   padding: 0;
   background: #161719;
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 #output {
@@ -19,6 +20,20 @@ html, body {
   border-radius: 16px;
 }
 
-#score {
+
+.metadata {
+}
+
+.link {
+  margin: 15px;
   color: white;
+  display: inline-block;
+}
+
+.footer {
+  width: 100%;
+  color: #333;
+  position: absolute;
+  bottom: 10px;
+  text-align: center;
 }

@@ -7,7 +7,7 @@ class IBlock extends Block {
     tiles[2] = Tile((width / 2).floor(), -1);
     tiles[3] = Tile((width / 2 + 1).floor(), -1);
     rotationTile = tiles[1];
-    color = '#3e4346';
+    color = '#007aff';
   }
 }
 
@@ -18,7 +18,7 @@ class OBlock extends Block {
     tiles[2] = Tile((width / 2).floor(), 0);
     tiles[3] = Tile((width / 2 + 1).floor(), 0);
     rotationTile = tiles[1];
-    color = '#3e4346';
+    color = '#f50057';
   }
 }
 
@@ -29,7 +29,7 @@ class JBlock extends Block {
     tiles[2] = Tile((width / 2 + 1).floor(), 0);
     tiles[3] = Tile((width / 2 - 1).floor(), -1);
     rotationTile = tiles[1];
-    color = '#3e4346';
+    color = '#4dd964';
   }
 }
 
@@ -40,7 +40,7 @@ class TBlock extends Block {
     tiles[2] = Tile((width / 2 + 1).floor(), 0);
     tiles[3] = Tile((width / 2).floor(), -1);
     rotationTile = tiles[1];
-    color = '#3e4346';
+    color = '#4dd0e1';
   }
 }
 
@@ -51,6 +51,6 @@ class SBlock extends Block {
     tiles[2] = Tile((width / 2).floor(), 0);
     tiles[3] = Tile((width / 2 + 1).floor(), 0);
     rotationTile = tiles[1];
-    color = '#3e4346';
+    color = '#f3ad55';
   }
 }
