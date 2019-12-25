@@ -11,7 +11,7 @@ html, body {
 }
 
 #output {
-  padding: 20px;
+  padding: 66px 20px;
   text-align: center;
 }
 
@@ -20,19 +20,36 @@ html, body {
   border-radius: 16px;
 }
 
+#score {
+  display: flex;
+  justify-content: center;
+}
 
-.metadata {
+#score > div {
+  background: #3e4346;
+  padding: 10px 22px;
+  border-radius: 3px;
+  width: 60px;
+  display: inline-block;
+  margin: 12px;
+  font-weight: bold;
+}
+
+.header {
+  padding: 15px;
 }
 
 .link {
-  margin: 15px;
+  margin: 0 8px;
   color: white;
-  display: inline-block;
+  text-decoration: none;
+  vertical-align: middle;
 }
 
 .footer {
   width: 100%;
   color: #333;
+  font-size: x-small;
   position: absolute;
   bottom: 10px;
   text-align: center;

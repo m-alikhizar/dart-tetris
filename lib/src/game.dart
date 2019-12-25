@@ -10,6 +10,7 @@ class Game {
   static int cellSize = 21;
 
   static int linesCleared;
+  static int bestScore;
   static CanvasRenderingContext2D ctx;
 
   static List<List<int>> boardState;
@@ -17,6 +18,7 @@ class Game {
 
   Game() {
     linesCleared = 0;
+    bestScore = 0;
     gameScore = Element.div()..id = "score";
 
     rowState = List<int>.filled(height, 0);
@@ -25,6 +27,29 @@ class Game {
           (_) => List<int>.filled(height, 0),
     )
         .toList();
+
+
+    fs.Firestore store = firestore();
+    fs.CollectionReference ref = store.collection('scores');
+
+    ref.onSnapshot.listen((querySnapshot) {
+      querySnapshot.docs.forEach((doc) {
+
+//        Map data = doc.data().entries;
+
+//        print('${data.tetris}');
+//          print('${doc.data()}');
+          print('${doc.data()}');
+
+
+        bestScore = 6;
+
+//        print('${doc}');
+//        if (change.type == "added") {
+          // Do something with change.doc
+//        }
+      });
+    });
   }
 
   Block getRandomPiece() {
@@ -147,9 +172,7 @@ class Game {
   }
 
   void updateGame(Timer timer) {
-    gameScore.setInnerHtml(
-      "<p>Score: ${linesCleared} Lines</p>",
-    );
+    gameScore.setInnerHtml("<div><div>Score</div><div>${linesCleared}</div></div><div><div>Best</div> <div>${bestScore}</div></div>");
 
     if (!pieceMoving('down')) {
       currentBlock.tiles.forEach((t) {
