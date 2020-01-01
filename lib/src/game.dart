@@ -34,20 +34,7 @@ class Game {
 
     ref.onSnapshot.listen((querySnapshot) {
       querySnapshot.docs.forEach((doc) {
-
-//        Map data = doc.data().entries;
-
-//        print('${data.tetris}');
-//          print('${doc.data()}');
-          print('${doc.data()}');
-
-
-        bestScore = 6;
-
-//        print('${doc}');
-//        if (change.type == "added") {
-          // Do something with change.doc
-//        }
+        bestScore = int.parse(doc.get('tetris'));
       });
     });
   }
@@ -69,25 +56,35 @@ class Game {
     return Block();
   }
 
-  void clearRows() {
+  void clearRows() async {
     for (int idx = 0; idx < rowState.length; idx++) {
       int row = rowState[idx];
 
-      if (row == width) {
-        ImageData imageData =
-        ctx.getImageData(0, 0, cellSize * width, cellSize * idx);
-        ctx.putImageData(imageData, 0, cellSize);
+      if(linesCleared > bestScore) {
+        fs.Firestore store = firestore();
+        fs.CollectionReference ref = store.collection('scores');
 
-        for (int y = idx; y > 0; y--) {
-          for (int x = 0; x < width; x++) {
-            boardState[x][y] = boardState[x][y - 1];
+        ref.onSnapshot.listen((querySnapshot) async {
+
+          var change = querySnapshot.docChanges()[0];
+
+
+          print('$change');
+
+
+          var docSnapshot = change.doc;
+
+          var value = docSnapshot.data();
+
+          value['tetris'] = linesCleared.toString();
+
+          try {
+            await ref.doc(docSnapshot.id).update(data: value);
+            bestScore = linesCleared;
+          } catch (e) {
+            print('Error while updating item, $e');
           }
-          rowState[y] = rowState[y - 1];
-        }
-
-        rowState[0] = 0;
-        boardState.forEach((c) => c[0] = 0);
-        linesCleared++;
+        });
       }
     }
   }
